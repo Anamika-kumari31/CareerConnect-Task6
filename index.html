@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerConnect - Jobs &amp; Internships</title>
+  <meta name="description" content="CareerConnect is a student-built jobs and internship manager. Search listings, filter by type and work mode, save opportunities and track your application status.">
+  <meta name="theme-color" content="#6551d5">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%236551d5'/%3E%3Ctext x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3ECC%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#jobs">Skip to opportunities</a>
+
+  <header>
+    <h2>CareerConnect</h2>
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#jobs">Opportunities</a>
+      <a href="#add">Add Opportunity</a>
+      <a href="#saved">Saved Jobs</a>
+      <a href="#tracker">My Applications</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <p class="tagline">YOUR CAREER STARTS HERE</p>
+    <h1>Find Your Next <span>Opportunity</span></h1>
+    <p>Explore jobs and internships, save your favourites
+      and manage your application progress in one place.</p>
+    <a href="#jobs" class="btn">Explore Opportunities</a>
+  </section>
+
+<main>
+  <section class="container" id="jobs">
+    <h2>Explore Opportunities</h2>
+    <p class="subtitle">Find an opportunity that matches your skills.</p>
+
+    <div class="filters">
+      <div class="field">
+        <label for="searchInput">Search</label>
+        <input type="text" id="searchInput" autocomplete="off"
+          placeholder="Search job, company or skill">
+      </div>
+      <div class="field">
+        <label for="typeFilter">Job Type</label>
+        <select id="typeFilter">
+          <option value="All">All Types</option>
+          <option value="Internship">Internship</option>
+          <option value="Full-time">Full-time</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="modeFilter">Work Mode</label>
+        <select id="modeFilter">
+          <option value="All">All Modes</option>
+          <option value="Remote">Remote</option>
+          <option value="Hybrid">Hybrid</option>
+          <option value="On-site">On-site</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="sortSelect">Sort by</label>
+        <select id="sortSelect">
+          <option value="default">Default order</option>
+          <option value="title">Job title (A-Z)</option>
+          <option value="company">Company (A-Z)</option>
+          <option value="newest">Newest first</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="results-bar">
+      <p id="resultCount" class="result-count" aria-live="polite"></p>
+      <button type="button" id="clearFilters" class="clear-btn">Clear filters</button>
+    </div>
+
+    <div id="jobList" class="job-grid"></div>
+    <p id="emptyMessage" class="empty hidden">
+      No matching opportunities found.
+    </p>
+  </section>
+
+  <section class="container alternate" id="add">
+    <h2>Add an Opportunity</h2>
+    <p class="subtitle">Found a listing elsewhere? Add it here to save and track it. It is stored only in this browser.</p>
+
+    <form id="addJobForm" class="add-form" novalidate>
+      <div class="field">
+        <label for="f-title">Job title</label>
+        <input type="text" id="f-title" name="title" maxlength="60"
+          aria-describedby="err-title" required>
+        <span class="error" id="err-title" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="f-company">Company</label>
+        <input type="text" id="f-company" name="company" maxlength="60"
+          aria-describedby="err-company" required>
+        <span class="error" id="err-company" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="f-type">Job type</label>
+        <select id="f-type" name="type" aria-describedby="err-type" required>
+          <option value="">Select type</option>
+          <option value="Internship">Internship</option>
+          <option value="Full-time">Full-time</option>
+        </select>
+        <span class="error" id="err-type" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="f-mode">Work mode</label>
+        <select id="f-mode" name="mode" aria-describedby="err-mode" required>
+          <option value="">Select mode</option>
+          <option value="Remote">Remote</option>
+          <option value="Hybrid">Hybrid</option>
+          <option value="On-site">On-site</option>
+        </select>
+        <span class="error" id="err-mode" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="f-location">Location</label>
+        <input type="text" id="f-location" name="location" maxlength="60"
+          aria-describedby="err-location" required>
+        <span class="error" id="err-location" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="f-skills">Skills (comma separated)</label>
+        <input type="text" id="f-skills" name="skills" maxlength="100"
+          aria-describedby="err-skills" required>
+        <span class="error" id="err-skills" role="alert"></span>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="track-btn">Add Opportunity</button>
+        <p id="formStatus" class="form-status" role="status"></p>
+      </div>
+    </form>
+  </section>
+
+  <section class="container" id="saved">
+    <h2>Saved Opportunities</h2>
+    <div id="savedList" class="job-grid"></div>
+  </section>
+
+  <section class="container alternate" id="tracker">
+    <h2>My Application Tracker</h2>
+    <p class="subtitle">Keep track of your application progress.</p>
+    <div id="applicationList"></div>
+  </section>
+</main>
+
+  <footer>
+    <h3>CareerConnect</h3>
+    <p>A student project built with HTML, CSS and JavaScript.</p>
+    <p>Demo listings only — verify vacancies before applying.</p>
+  </footer>
+
+  <script src="logic.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
